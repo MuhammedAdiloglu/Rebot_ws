@@ -1,0 +1,173 @@
+<?xml version="1.0" ?>
+<robot name="rebot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find rebot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find rebot_description)/urdf/rebot.trans" />
+<xacro:include filename="$(find rebot_description)/urdf/rebot.gazebo" />
+<link name="base_link">    
+  <pose>0.07896610757997144 -0.04487752828279189 0.6054372139644785 0 0 0</pose>
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.07896610757997144 -0.04487752828279189 0.6054372139644785"/>
+    <mass value="8.94303204413872"/>
+    <inertia ixx="1.532525" ixy="0.000646" ixz="-0.395581" iyy="2.04819" iyz="0.000961" izz="0.930204"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="red"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="caster_right_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.03716127608985326 0.07499998230872018 -0.022955297629710873"/>
+    <mass value="1.0732963537352065"/>
+    <inertia ixx="0.000577" ixy="-0.0" ixz="-4.2e-05" iyy="0.000706" iyz="-0.0" izz="0.0006"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.3796 0.279772 -0.05301"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/caster_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.3796 0.279772 -0.05301"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/caster_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="caster_left_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.03737438661100134 -0.06526599769128028 -0.022955297629710866"/>
+    <mass value="1.0732963537352065"/>
+    <inertia ixx="0.000577" ixy="-0.0" ixz="-4.2e-05" iyy="0.000706" iyz="-0.0" izz="0.0006"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.3796 -0.180228 -0.05301"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/caster_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.3796 -0.180228 -0.05301"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/caster_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="RPLIDAR_A3_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.000637141204361924 9.38338334375427e-06 0.019482247282868584"/>
+    <mass value="1.3112592633469056"/>
+    <inertia ixx="0.000635" ixy="-0.0" ixz="1e-05" iyy="0.000619" iyz="-0.0" izz="0.000886"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.5004 0.044772 -0.08001"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/RPLIDAR_A3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.5004 0.044772 -0.08001"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/RPLIDAR_A3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_left_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-2.931648786463903e-05 0.06422809906261817 -2.5092136120785646e-05"/>
+    <mass value="3.920279781327941"/>
+    <inertia ixx="0.007914" ixy="-6e-06" ixz="-2e-06" iyy="0.013102" iyz="-5e-06" izz="0.007914"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.251209 -0.182418 -0.067209"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/wheel_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.251209 -0.182418 -0.067209"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/wheel_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_right_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="2.908693980002708e-05 -0.0642283286106799 -2.509213612301997e-05"/>
+    <mass value="3.920279781327941"/>
+    <inertia ixx="0.007914" ixy="-6e-06" ixz="2e-06" iyy="0.013102" iyz="5e-06" izz="0.007914"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.251209 0.2715 -0.067209"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/wheel_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.251209 0.2715 -0.067209"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/wheel_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="caster_right" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.3796 -0.279772 0.05301"/>
+  <parent link="base_link"/>
+  <child link="caster_right_1"/>
+</joint>
+
+<joint name="caster_left" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.3796 0.180228 0.05301"/>
+  <parent link="base_link"/>
+  <child link="caster_left_1"/>
+</joint>
+
+<joint name="RPLIDAR_A3_1" type="fixed">
+  <origin rpy="0 0 0" xyz="0.5004 -0.044772 0.08001"/>
+  <parent link="base_link"/>
+  <child link="RPLIDAR_A3_1"/>
+</joint>
+
+<joint name="wheel_left_1" type="continuous">
+  <origin rpy="0 0 0" xyz="0.251209 0.182418 0.067209"/>
+  <parent link="base_link"/>
+  <child link="wheel_left_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="wheel_right_1" type="continuous">
+  <origin rpy="0 0 0" xyz="0.251209 -0.2715 0.067209"/>
+  <parent link="base_link"/>
+  <child link="wheel_right_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+<!--xacro:include filename="$(find realsense_ros_gazebo)/xacro/depthcam.xacro"/>
+<xacro:realsense_d435 sensor_name="d435" parent_link="base_link" rate="10">
+  <origin rpy="0 0 0 " xyz="-0.113423 0 1.410089"/>
+</xacro:realsense_d435-->
+ <!-- <sensor_d435i parent="base_link" name = "$(arg camera_topics)" use_nominal_extrinsics = "True">
+      <origin rpy="0 0 0 " xyz="-0.228 0 1.0"/>
+    </sensor_d435i> -->
+
+</robot>

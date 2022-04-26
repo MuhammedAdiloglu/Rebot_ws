@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Custom gazebo arguements -->
+  <arg name="world" default="empty"/> 
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+   <!-- World File -->
+  <arg name="world_file" default="$(find pura_gazebo)/worlds/arche_with_artag.world"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="world_name" value="$(arg world_file)"/>
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="verbose" value="false"/>
+  </include>
+ 
+  <param command="$(find xacro)/xacro $(find pura_description)/urdf/pura.xacro" name="robot_description"/>
+
+  <!--Starting Point Sim-->
+  
+    <arg name="x" default="1.0"/>
+    <arg name="y" default="0.0"/>
+    <arg name="z" default="-0.0"/>
+    <arg name="roll" default="-0.0"/>
+    <arg name="pitch" default="0.0"/>  
+    <arg name="yaw" default="0.0"/>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+          args="-urdf -param robot_description -model pura -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
+  <!-- Send fake joint values-->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="false"/>
+  </node>    
+  <!-- Send robot states to tf -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+</launch>

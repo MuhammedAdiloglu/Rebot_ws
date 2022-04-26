@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="circle_school">
+    <static>true</static>
+    <link name="circle_school_link">
+        <collision name="circle_school_collision">  
+         <geometry>
+            <mesh>
+                <uri>model://circle_school/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </collision>
+      
+      <visual name="circle_school_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://circle_school/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<robot name="rebot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<!--xacro:include filename="$(find rebot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find rebot_description)/urdf/rebot.trans" />
+<xacro:include filename="$(find rebot_description)/urdf/rebot.gazebo" />
+<xacro:include filename="$(find rebot_description)/urdf/rebot.xacro" -->
+
+<xacro:property name="body_color" value="Gazebo/Silver" />
+<xacro:property name="standard_friction" value="1.0" />
+<xacro:property name="wheel_friction" value="100.0" />
+<xacro:property name="caster_friction" value="0.0005" />
+
+<gazebo>
+  <plugin filename="libgazebo_ros_control.so" name="control"/>
+</gazebo>
+<gazebo reference="base_link">
+  <material>${body_color}</material>
+  <mu1>${standard_friction}</mu1>
+  <mu2>${standard_friction}</mu2>
+  <selfCollide>true</selfCollide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="caster_right_1">
+  <material>${body_color}</material>
+  <mu1>${caster_friction}</mu1>
+  <mu2>${caster_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="caster_left_1">
+  <material>${body_color}</material>
+  <mu1>${caster_friction}</mu1>
+  <mu2>${caster_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="RPLIDAR_A3_1">
+  <material>${body_color}</material>
+  <mu1>${standard_friction}</mu1>
+  <mu2>${standard_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="wheel_left_1">
+  <material>${body_color}</material>
+  <mu1>${wheel_friction}</mu1>
+  <mu2>${wheel_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="wheel_right_1">
+  <material>${body_color}</material>
+  <mu1>${wheel_friction}</mu1>
+  <mu2>${wheel_friction}</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <updateRate>20</updateRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <leftJoint>wheel_left_1</leftJoint>
+      <rightJoint>wheel_right_1</rightJoint>
+      <wheelSeparation>0.453918</wheelSeparation>
+      <wheelDiameter>0.15</wheelDiameter>
+      <wheelAcceleration>2.0</wheelAcceleration>
+      <wheelTorque>100</wheelTorque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometrySource>1</odometrySource>
+      <publishWheelTF>false</publishWheelTF>
+      <publishOdomTF>true</publishOdomTF>
+      <publishOdom>true</publishOdom>
+      <publishWheelJointState>true</publishWheelJointState>
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="RPLIDAR_A3_1">
+		<sensor type="ray" name="RPLIDAR_A3_1">
+			<pose>0 0 0 0 0 0</pose>
+			<visualize>true</visualize>
+			<update_rate>50</update_rate>
+			<ray>
+				<scan>
+					<horizontal>
+						<samples>720</samples>
+						<resolution>1</resolution>
+						<min_angle>-1.74533</min_angle>
+						<max_angle>1.74533</max_angle>
+					</horizontal>
+				</scan>
+				<range>
+					<min>0.1</min>
+					<max>15.0</max>
+					<resolution>0.01</resolution>
+				</range>
+				<noise>
+					<type>gaussian</type>
+					<mean>0.0</mean>
+					<stddev>0.01</stddev>
+				</noise>
+			</ray>
+			<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+				<topicName>rebot/laser/scan</topicName>
+				<frameName>RPLIDAR_A3_1</frameName>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>mcu_imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+
+<!--gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <updateRate>20</updateRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <leftJoint>wheel_left_1</leftJoint>
+      <rightJoint>wheel_right_1</rightJoint>
+      <wheelSeparation>0.453918</wheelSeparation>
+      <wheelDiameter>0.15</wheelDiameter>
+      <wheelAcceleration>2.0</wheelAcceleration>
+      <wheelTorque>100</wheelTorque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometrySource>1</odometrySource>
+      <publishWheelTF>false</publishWheelTF>
+      <publishOdomTF>true</publishOdomTF>
+      <publishOdom>true</publishOdom>
+      <publishWheelJointState>true</publishWheelJointState>
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="Rp_lidar">
+		<sensor type="ray" name="Rp_lidar">
+			<pose>0 0 0 0 0 0</pose>
+			<visualize>true</visualize>
+			<update_rate>10</update_rate>
+			<ray>
+				<scan>
+					<horizontal>
+						<samples>720</samples>
+						<resolution>1</resolution>
+						<min_angle>-1.74533</min_angle>
+						<max_angle>1.74533</max_angle>
+					</horizontal>
+				</scan>
+				<range>
+					<min>0.1</min>
+					<max>20.0</max>
+					<resolution>0.01</resolution>
+				</range>
+				<noise>
+					<type>gaussian</type>
+					<mean>0.0</mean>
+					<stddev>0.01</stddev>
+				</noise>
+			</ray>
+			<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+				<topicName>/scan_filtered</topicName>
+				<frameName>Rp_lidar</frameName>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>mcu_imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo-->
+
+</robot>

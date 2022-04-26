@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="long_table">
+    <static>true</static>
+    <link name="long_table_link">
+        <collision name="long_table_collision">  
+         <geometry>
+            <mesh>
+                <uri>model://long_table/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </collision>
+      
+      <visual name="long_table_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://long_table/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

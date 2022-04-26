@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="ucebna">
+    <static>true</static>
+    <link name="ucebna_link">
+        <collision name="ucebna_collision">  
+         <geometry>
+            <mesh>
+                <uri>model://ucebna/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </collision>
+      
+      <visual name="ucebna_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://ucebna/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

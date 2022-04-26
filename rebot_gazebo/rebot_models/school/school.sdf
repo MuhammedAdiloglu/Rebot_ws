@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="school">
+    <static>true</static>
+    <link name="school_link">
+        <collision name="school_collision">  
+         <geometry>
+            <mesh>
+                <uri>model://school/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </collision>
+      
+      <visual name="school_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://school/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

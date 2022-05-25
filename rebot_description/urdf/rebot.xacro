@@ -3,7 +3,8 @@
 
 <xacro:include filename="$(find rebot_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find rebot_description)/urdf/rebot.trans" />
-<xacro:include filename="$(find rebot_description)/urdf/rebot.gazebo" />
+<!-- <xacro:include filename="$(find rebot_description)/urdf/rebot.gazebo" /> -->
+<link name="robot_footprint"/>
 <link name="base_link">    
   <pose>0.07896610757997144 -0.04487752828279189 0.6054372139644785 0 0 0</pose>
   <inertial>
@@ -25,6 +26,11 @@
     </geometry>
   </collision>
 </link>
+<joint name="base_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="robot_footprint"/>
+    <child link="base_link" />
+</joint>
 
 <link name="caster_right_1">
   <inertial>
@@ -68,7 +74,7 @@
   </collision>
 </link>
 
-<link name="RPLIDAR_A3_1">
+<!-- <link name="RPLIDAR_A3_1">
   <inertial>
     <origin rpy="0 0 0" xyz="-0.000637141204361924 9.38338334375427e-06 0.019482247282868584"/>
     <mass value="1.3112592633469056"/>
@@ -87,7 +93,28 @@
       <mesh filename="package://rebot_description/meshes/RPLIDAR_A3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
+</link> -->
+<link name="ZED2i">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.000637141204361924 9.38338334375427e-06 0.019482247282868584"/>
+    <mass value="1.3112592633469056"/>
+    <inertia ixx="0.000635" ixy="-0.0" ixz="1e-05" iyy="0.000619" iyz="-0.0" izz="0.000886"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.5004 0.044772 -0.08001"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/ZED2i.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.5004 0.044772 -0.08001"/>
+    <geometry>
+      <mesh filename="package://rebot_description/meshes/ZED2i.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
 </link>
+
 
 <link name="wheel_left_1">
   <inertial>
@@ -143,10 +170,10 @@
   <child link="caster_left_1"/>
 </joint>
 
-<joint name="RPLIDAR_A3_1" type="fixed">
+<joint name="ZED2i" type="fixed">
   <origin rpy="0 0 0" xyz="0.5004 -0.044772 0.08001"/>
   <parent link="base_link"/>
-  <child link="RPLIDAR_A3_1"/>
+  <child link="ZED2i"/>
 </joint>
 
 <joint name="wheel_left_1" type="continuous">
